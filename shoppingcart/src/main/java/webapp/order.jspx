@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:jsp="http://java.sun.com/JSP/Page"
+	    xmlns:c="http://java.sun.com/jsp/jstl/core">
+<jsp:useBean id="customer" class="met.web.app.CustomerBean" scope="session"/>
+<jsp:useBean id="product"  class="met.web.app.ProductBean" scope="session"/>
+<jsp:setProperty name="customer" property="*"/>
+<head><title>Order Form for Customer ${customer.custId}</title></head>
+<body>
+	<form method="post">
+	<p><b>Product No:</b> <select name="pno">
+	
+				<c:forEach var="i" items="${product.entries}">
+					<option>${i.productNo}</option>
+				</c:forEach>
+			 </select>
+	</p>  
+	<p><b>Price:</b> <input type="number" name="price"/></p>  
+	<p><b>Quantity:</b> <input type="number" name="quantity"/></p>  
+
+	<p><input type="submit" value="Order"/></p>
+	</form>
+	<p>
+		<c:if test="${param.failed}">
+	        <i>Authentication Failed </i>
+		</c:if>
+	</p>
+	<p>
+		<a href="invoice.jspx">Get Invoices</a>
+	</p>
+</body>
+</html>
